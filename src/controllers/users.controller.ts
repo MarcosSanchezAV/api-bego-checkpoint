@@ -11,6 +11,15 @@ const register = async ({ body }: Request, res: Response) => {
     }
 }
 
-const login = async (req: Request, res: Response) => {}
+const login = async ({ body }: Request, res: Response) => {
+    const { email, password } = body
+    const responseService = await loginUser({ email, password })
+    if (responseService === "INCORRECT_PASSWORD") {
+        res.status(403)
+        res.send(responseService)
+    } else {
+        res.send(responseService)
+    }
+}
 
 export { register, login }
