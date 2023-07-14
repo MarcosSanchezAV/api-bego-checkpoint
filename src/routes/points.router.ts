@@ -3,7 +3,7 @@ import { getPoint, getPoints } from "../controllers/points.controller";
 
 const router = Router()
 
-router.get('/points', getPoints)
-router.get('/point/:id', getPoint)
+router.get('', getPoints)
+router.get('/:id', getPoint)
 
-export { router }
+export default router
