@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { getCoordinates } from "../services/googlemaps.service";
+import { getCoordinates, getDistance } from "../services/googlemaps.service";
 
 const testGetCoordinates = async ({ body }: Request, res: Response) => {
     const { placeId } = body
@@ -12,4 +12,15 @@ const testGetCoordinates = async ({ body }: Request, res: Response) => {
     }
 }
 
-export { testGetCoordinates }
+const testGetDistance = async ({ body }: Request, res: Response) => {
+    const { origin, destination } = body
+    try {
+        const distance = await getDistance(origin, destination)
+        res.send(`Distance is: ${distance} km`)
+    } catch(e) {
+        res.status(500)
+        res.send(e)
+    }
+}
+
+export { testGetCoordinates, testGetDistance }
