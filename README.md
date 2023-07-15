@@ -14,9 +14,13 @@ Cuando una orden es creada aparecerá en estado *pendiente* por defecto. El usua
 
 La API también permite consultar la lista de puntos y camiones disponibles así como listar un punto o un camión en específico
 
-# Como iniciar el proyecto
+# Tabla de contenido
+- [Como iniciar el proyecto](#inicio)
+    - [Comandos](#comandos)
 
-## Comandos
+# <a id="inicio"></a>Como iniciar el proyecto
+
+## <a id="comandos"></a>Comandos
 
 Para descargar el repositorio en el local es necesario posicionarse en la carpeta en la que se desea tener el proyecto y ejecutar el siguiente comando:
 
@@ -121,6 +125,10 @@ Para el desarrollo de la API se han desarrollado los siguientes endpoints de acu
 ## Módulo orders
 
 - [ ]  Implementar módulo Orders
+    - [x]  Implementar endpoint para agregar una orden
+    - [x]  Implementar endpoints para listar ordenes
+    - [ ]  Implementar endpoint updateOrderStatus → cambiar el estado de la orden (pending, in progress, finished y cancelled)
+    - [ ]  Implementar endpoint updateOrder → validar que se modifique solo si el status está en Pending
 
 ## Módulo routes
 
@@ -132,7 +140,14 @@ Para el desarrollo de la API se han desarrollado los siguientes endpoints de acu
 - [ ]  Implementar el session middleware para proteger todas las rutas (excepto el endpoint **register**)
 - [ ]  Documentar controladores, servicios, rutas, utilidades y el archivo server.ts
 
+## Corregir
+
+- [ ]  Los endpoint GET de los módulos *routes* y *orders* → en la respuesta devuelven el id de los objetos relacionados → destructurar correctamente la respuesta
+    - [ ]  endpoints de *routes*
+    - [ ]  endpoint de *orders*
+
 ## Documento README
 
 - [ ]  Descripción del desarrollo del módulo *orders*
 - [ ]  Terminar sección Endpoints
+- [ ]  Crear un índice dinámico 
