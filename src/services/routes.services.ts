@@ -1,4 +1,5 @@
 import { RouteRequest } from "../interfaces/routeRequest.interface"
+import PointModel from "../models/point.model"
 import RouteModel from "../models/route.model"
 import { getCoordinates, getDistance } from "./googlemaps.service"
 import { findPoint } from "./points.service"
@@ -24,12 +25,14 @@ const createRoute = async ({ name, from, to }: RouteRequest) => {
 
 const findRoutes = async () => {
     const response = await RouteModel.find({})
-    return response
+    const routes = await Promise.all(response.map(route => destructurateRoute(route)))
+    return routes
 }
 
 const findRoute = async (id: string) => {
     const response = await RouteModel.findOne({_id: id})
-    return response
+    const route = await destructurateRoute(response)
+    return route
 }
 
 
@@ -52,6 +55,21 @@ const createDistance = async (from: string, to: string) => {
     const destination = toPoint.location.placeId
     const distance = await getDistance(origin, destination)
     return distance
+}
+
+const destructurateRoute = async (route: any) => {
+    const pickupPoint = await PointModel.findOne({ _id: route.pickup.point})
+    const dropOffPoint = await PointModel.findOne({ _id: route.dropOff.point})
+
+    const routeObject = {
+        name: route.name,
+        pickUp: pickupPoint,
+        dropOffPoint: dropOffPoint,
+        distance: route.distance,
+        isAssigned: route.isAssigned
+    }
+
+    return routeObject
 }
 
 export { createRoute, findRoute, findRoutes }

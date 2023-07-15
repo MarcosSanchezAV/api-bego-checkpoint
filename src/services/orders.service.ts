@@ -2,6 +2,7 @@ import { Order } from "../interfaces/order.interface"
 import OrderModel from "../models/order.model"
 import RouteModel from "../models/route.model"
 import TruckModel from "../models/truck.model"
+import { findRoute } from "./routes.services"
 
 const createOrder = async ({ type, description, route, truck }: Order) => {
     const response = await OrderModel.create({ type, description, route, truck })
@@ -21,7 +22,7 @@ const findOrder = async (id: string) => {
 }
 
 const destructurateOrder = async (order: any) => {
-    const routeObject = await RouteModel.findOne({_id: order.route})
+    const routeObject = await findRoute(order.route)
     const truckObject = await TruckModel.findOne({_id: order.truck})
 
     const orderObject = {
