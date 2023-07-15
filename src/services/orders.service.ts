@@ -2,7 +2,7 @@ import { Order, Status } from "../interfaces/order.interface"
 import OrderModel from "../models/order.model"
 import TruckModel from "../models/truck.model"
 import { capitalizeFirstLetter } from "../utils/capitalize.handler"
-import { findRoute } from "./routes.services"
+import { assignRoute, findRoute } from "./routes.services"
 
 const createOrder = async ({ type, description, route, truck }: Order) => {
     const response = await OrderModel.create({ type, description, route, truck })
@@ -30,9 +30,9 @@ const updateOrderStatus = async (id: string, newStatus: string) => {
     if (!order) return "ORDER_NOT_FOUND"
 
     if (status !== Status.PENDING && !order.route.isAssigned) {
-        // actualizar isAssigned a true de la ruta mediante el service updateRoute
+        await assignRoute(order.route.id, true)
     } else if (status === Status.PENDING && order.route.isAssigned) {
-        // actualizar isAssigned a false de la ruta mediante el service udpateRoute
+        await assignRoute(order.route.id, false) 
     }
 
     const response = await OrderModel.findOneAndUpdate({ _id: id }, { status }, { new: true })
