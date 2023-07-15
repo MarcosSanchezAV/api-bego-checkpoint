@@ -1,7 +1,7 @@
-import { Coordenates } from "./coordenates.interface";
+import { Coordinates } from "./coordinates.interface";
 import { Point } from "./point.interface";
 
 export interface Location {
     point: Point,
-    coordenates: Coordenates
+    coordinates: Coordinates
 }
