@@ -127,7 +127,7 @@ Para el desarrollo de la API se han desarrollado los siguientes endpoints de acu
 - [ ]  Implementar módulo Orders
     - [x]  Implementar endpoint para agregar una orden
     - [x]  Implementar endpoints para listar ordenes
-    - [ ]  Implementar endpoint updateOrderStatus → cambiar el estado de la orden (pending, in progress, finished y cancelled)
+    - [x]  Implementar endpoint updateOrderStatus → cambiar el estado de la orden (pending, in progress, finished y cancelled)
     - [ ]  Implementar endpoint updateOrder → validar que se modifique solo si el status está en Pending
 
 ## Módulo routes

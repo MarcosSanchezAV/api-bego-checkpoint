@@ -26,13 +26,14 @@ const updateOrderStatus = async (id: string, newStatus: string) => {
     const status = capitalizeFirstLetter(newStatus)
     if(!Object.values(Status).includes(status as Status)) return "INVALID_STATUS"
 
-    const order = await OrderModel.findOne({ _id: id})
+    const order = await findOrder(id)
     if (!order) return "ORDER_NOT_FOUND"
 
-    if (status === Status.IN_PROGRESS) {
-        // modificar isAssigned de la ruta 
-        // en caso de que no se cumpla esta condición validar verificar si isAssigned de la ruta es true para devolverlo a false
-    } 
+    if (status !== Status.PENDING && !order.route.isAssigned) {
+        // actualizar isAssigned a true de la ruta mediante el service updateRoute
+    } else if (status === Status.PENDING && order.route.isAssigned) {
+        // actualizar isAssigned a false de la ruta mediante el service udpateRoute
+    }
 
     const response = await OrderModel.findOneAndUpdate({_id: id}, { status }, { new: true} )
     return response
