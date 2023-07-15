@@ -144,7 +144,7 @@ Para el desarrollo de la API se han desarrollado los siguientes endpoints de acu
 
 - [ ]  Los endpoint GET de los módulos *routes* y *orders* → en la respuesta devuelven el id de los objetos relacionados → destructurar correctamente la respuesta
     - [ ]  endpoints de *routes*
-    - [ ]  endpoint de *orders*
+    - [x]  endpoint de *orders*
 
 ## Documento README
 
