@@ -97,6 +97,7 @@ const destructurateRoute = async (route: any) => {
     const dropOffPoint = await PointModel.findOne({ _id: route.dropOff.point })
 
     const routeObject = {
+        id: route._id,
         name: route.name,
         pickUp: pickupPoint,
         dropOff: dropOffPoint,
