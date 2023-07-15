@@ -59,7 +59,7 @@ Como buena práctica el archivo .env está declarado en el .gitignore, por lo qu
 PORT=3000
 DB_URI=mongodb://localhost:27017/db-bego-checkpoint
 JWT_SECRET=secras1456
-API_KEY=AIzaSyAeId4pCjPNjPoET2hWPamiuPuEb_KI_n0
+API_KEY= // omitida por cuestiones de seguridad
 API_GOOGLE_MAPS_URL_COORDINATES=https://maps.googleapis.com/maps/api/geocode/json
 API_GOOGLE_MAPS_URL_DISTANCE=https://maps.googleapis.com/maps/api/distancematrix/json
 ```
