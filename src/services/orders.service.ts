@@ -16,7 +16,7 @@ const findOrders = async () => {
 }
 
 const findOrder = async (id: string) => {
-    const response = await OrderModel.findOne({ _id: id})
+    const response = await OrderModel.findOne({ _id: id })
     const order = await destructurateOrder(response)
     return order
 }
@@ -24,24 +24,35 @@ const findOrder = async (id: string) => {
 
 const updateOrderStatus = async (id: string, newStatus: string) => {
     const status = capitalizeFirstLetter(newStatus)
-    if(!Object.values(Status).includes(status as Status)) return "INVALID_STATUS"
+    if (!Object.values(Status).includes(status as Status)) return "INVALID_STATUS"
 
-    const order = await OrderModel.findOne({ _id: id})
+    const order = await findOrder(id)
     if (!order) return "ORDER_NOT_FOUND"
 
-    if (status === Status.IN_PROGRESS) {
-        // modificar isAssigned de la ruta 
-        // en caso de que no se cumpla esta condición validar verificar si isAssigned de la ruta es true para devolverlo a false
-    } 
+    if (status !== Status.PENDING && !order.route.isAssigned) {
+        // actualizar isAssigned a true de la ruta mediante el service updateRoute
+    } else if (status === Status.PENDING && order.route.isAssigned) {
+        // actualizar isAssigned a false de la ruta mediante el service udpateRoute
+    }
 
-    const response = await OrderModel.findOneAndUpdate({_id: id}, { status }, { new: true} )
+    const response = await OrderModel.findOneAndUpdate({ _id: id }, { status }, { new: true })
+    return response
+}
+
+const updateOrder = async (id: string, { type, description, route, truck }: Order) => {
+    const order = await OrderModel.findOne({ _id: id })
+    if (!order) return "ORDER_NOT_FOUND"
+
+    if (order.status !== Status.PENDING) return "CANNOT_MODIFY_THIS_ORDER_BECAUSE_IT_WAS_CONFIRMED"
+
+    const response = await OrderModel.findOneAndUpdate({ _id: id }, { type, description, route, truck }, { new: true })
     return response
 }
 
 // Método privado
 const destructurateOrder = async (order: any) => {
     const routeObject = await findRoute(order.route)
-    const truckObject = await TruckModel.findOne({_id: order.truck})
+    const truckObject = await TruckModel.findOne({ _id: order.truck })
 
     const orderObject = {
         id: order._id,
@@ -55,4 +66,4 @@ const destructurateOrder = async (order: any) => {
     return orderObject
 }
 
-export { createOrder, findOrders, findOrder, updateOrderStatus } 
+export { createOrder, findOrders, findOrder, updateOrderStatus, updateOrder } 

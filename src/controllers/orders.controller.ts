@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import httpHandler from "../utils/error.handler";
-import { createOrder, findOrder, findOrders, updateOrderStatus } from "../services/orders.service";
-import { Order } from "../interfaces/order.interface";
+import { createOrder, findOrder, findOrders, updateOrder, updateOrderStatus } from "../services/orders.service";
 
 const addOrder = async ({ body }: Request, res: Response) => {
     try {
@@ -41,4 +40,14 @@ const changeOrderStatus = async ({ params }: Request, res: Response) => {
     }
 }
 
-export { addOrder, getOrders, getOrder, changeOrderStatus }
+const changeOrder = async ({ params, body }: Request, res: Response) => {
+    try {
+        const { id } = params
+        const responseService = await updateOrder(id, body)
+        res.send(responseService)
+    } catch (e) {
+        httpHandler(res, e)
+    }
+}
+
+export { addOrder, getOrders, getOrder, changeOrderStatus, changeOrder }
