@@ -18,7 +18,7 @@ export enum Type {
 
 export enum Status {
     PENDING = "Pending",
-    IN_PROGRESS = "In Progress",
+    IN_PROGRESS = "Progress",
     FINISHED = "Finished",
     CANCELLED = "Cancelled"
 }
