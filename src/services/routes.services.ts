@@ -19,15 +19,16 @@ const createRoute = async ({ name, from, to }: RouteRequest) => {
     const destination = await createCoordinates(to)
     const distance = await createDistance(from, to)
 
-    const response = await RouteModel.create({ name, 
+    const response = await RouteModel.create({
+        name,
         pickup: {
             point: from,
             coordinates: origin
-        }, 
+        },
         dropOff: {
             point: to,
             coordinates: destination
-        }, 
+        },
         distance
     })
     return response
@@ -40,9 +41,33 @@ const findRoutes = async () => {
 }
 
 const findRoute = async (id: string) => {
-    const response = await RouteModel.findOne({_id: id})
+    const response = await RouteModel.findOne({ _id: id })
     const route = await destructurateRoute(response)
     return route
+}
+
+const assignRoute = async (id: string, isAssigned: boolean) => {
+    const response = RouteModel.findOneAndUpdate({ _id: id}, { isAssigned }, { new: true })
+    return response
+}
+
+const updateRoute = async (id: string, { name, from, to}: RouteRequest) => {
+    const isExist = await validateRoute(from, to)
+    if (isExist) return "CANNOT_CREATE_SAME_ROUTE_TWICE"
+    
+    const route = await findRoute(id)
+    if (route.isAssigned) return "CANNOT_MODIFY_THIS_ORDER_BECAUSE_IT_WAS_ASSIGNED"
+
+    const response = await RouteModel.findOneAndUpdate({ _id: id}, {
+        name,
+        pickup: {
+            point: from
+        },
+        dropOff: {
+            point: to
+        }
+    }, { new: true })
+    return response
 }
 
 
@@ -50,7 +75,7 @@ const findRoute = async (id: string) => {
 const createCoordinates = async (id: string) => {
     const point = await findPoint(id)
     if (!point) return "POINT_NOT_FOUND"
-    
+
     const placeId = point.location.placeId
     const coordinates = await getCoordinates(placeId)
     return coordinates
@@ -68,13 +93,13 @@ const createDistance = async (from: string, to: string) => {
 }
 
 const destructurateRoute = async (route: any) => {
-    const pickupPoint = await PointModel.findOne({ _id: route.pickup.point})
-    const dropOffPoint = await PointModel.findOne({ _id: route.dropOff.point})
+    const pickupPoint = await PointModel.findOne({ _id: route.pickup.point })
+    const dropOffPoint = await PointModel.findOne({ _id: route.dropOff.point })
 
     const routeObject = {
         name: route.name,
         pickUp: pickupPoint,
-        dropOffPoint: dropOffPoint,
+        dropOff: dropOffPoint,
         distance: route.distance,
         isAssigned: route.isAssigned
     }
@@ -90,4 +115,4 @@ const validateRoute = async (from: string, to: string) => {
     return route
 }
 
-export { createRoute, findRoute, findRoutes }
+export { createRoute, findRoute, findRoutes, assignRoute, updateRoute }
