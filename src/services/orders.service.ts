@@ -6,4 +6,14 @@ const createOrder = async ({ type, description, route, truck }: Order) => {
     return response
 }
 
-export { createOrder } 
+const findOrders = async () => {
+    const response = await OrderModel.find({})
+    return response
+}
+
+const findOrder = async (id: string) => {
+    const response = await OrderModel.findOne({ _id: id})
+    return response
+}
+
+export { createOrder, findOrders, findOrder } 
