@@ -4,7 +4,17 @@ import RouteModel from "../models/route.model"
 import { getCoordinates, getDistance } from "./googlemaps.service"
 import { findPoint } from "./points.service"
 
+
+/**
+ * 
+ * @param from id del punto de partida
+ * @param to id del punto de llegada
+ * @returns la ruta creada con el nombre, punto de partida y punto de llegada
+ */
 const createRoute = async ({ name, from, to }: RouteRequest) => {
+    const isExist = await validateRoute(from, to)
+    if (isExist) return "CANNOT_CREATE_SAME_ROUTE_TWICE"
+
     const origin = await createCoordinates(from)
     const destination = await createCoordinates(to)
     const distance = await createDistance(from, to)
@@ -70,6 +80,14 @@ const destructurateRoute = async (route: any) => {
     }
 
     return routeObject
+}
+
+const validateRoute = async (from: string, to: string) => {
+    const route = await RouteModel.findOne({
+        'pickup.point': from,
+        'dropOff.point': to
+    })
+    return route
 }
 
 export { createRoute, findRoute, findRoutes }
