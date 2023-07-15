@@ -22,6 +22,18 @@ const createRoute = async ({ name, from, to }: RouteRequest) => {
     return response
 }
 
+const findRoutes = async () => {
+    const response = await RouteModel.find({})
+    return response
+}
+
+const findRoute = async (id: string) => {
+    const response = await RouteModel.findOne({_id: id})
+    return response
+}
+
+
+// Metodos privados
 const createCoordinates = async (id: string) => {
     const point = await findPoint(id)
     if (!point) return "POINT_NOT_FOUND"
@@ -42,4 +54,4 @@ const createDistance = async (from: string, to: string) => {
     return distance
 }
 
-export { createRoute }
+export { createRoute, findRoute, findRoutes }
