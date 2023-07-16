@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createRoute, findRoute, findRoutes, updateRoute } from "../services/routes.services";
+import { createRoute, deleteRoute, findRoute, findRoutes, updateRoute } from "../services/routes.services";
 import httpHandler from "../utils/error.handler";
 
 const addRoute = async ({ body }: Request, res: Response) => {
@@ -40,9 +40,11 @@ const changeRoute = async ({ params, body }: Request, res: Response) => {
     }
 }
 
-const removeRoute = async (req: Request, res: Response) => {
+const removeRoute = async ({ params }: Request, res: Response) => {
     try {
-
+        const { id } = params
+        const response = await deleteRoute(id)
+        res.send(response)
     } catch (e) {
         httpHandler(res, e)
     }

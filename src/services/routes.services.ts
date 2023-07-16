@@ -70,6 +70,14 @@ const updateRoute = async (id: string, { name, from, to}: RouteRequest) => {
     return response
 }
 
+const deleteRoute = async (id: string) => {
+    const route = await findRoute(id)
+    if (route.isAssigned) return "CANNOT_DELETE_THIS_ORDER_BECAUSE_IT_WAS_ASSIGNED"
+    
+    const response = await RouteModel.findOneAndRemove({ _id: id})
+    return response ? response : "NOT_FOUND"
+}
+
 
 // Metodos privados
 const createCoordinates = async (id: string) => {
@@ -116,4 +124,4 @@ const validateRoute = async (from: string, to: string) => {
     return route
 }
 
-export { createRoute, findRoute, findRoutes, assignRoute, updateRoute }
+export { createRoute, findRoute, findRoutes, assignRoute, updateRoute, deleteRoute }
