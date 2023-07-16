@@ -95,9 +95,9 @@ Primero empecé con los módulos *points* y *trucks* ya que eran los más fácil
 
 Para el módulo *auth* cree una colección llamada *users* para guardar todos los usuarios registrados y poder consultarlos para realizar el login. También utilicé los módulos npm **bcryptjs** y **jsonwebtoken** para encriptar la contraseña que el usuario proporcione al momento de registrarse y para manejar las sesiones en las rutas
 
-Para el módulo *routes* implementé el servicio para obtener las coordenadas de los puntos que conforman la ruta y la distancia entre ellos mediante peticiones a las APIs de Google (al parecer el número de peticiones son limitadas)
+Para el módulo *routes* implementé el servicio para obtener las coordenadas de los puntos que conforman la ruta y la distancia entre ellos mediante peticiones a las APIs de Google (al parecer el número de peticiones son limitadas). 
 
-Falta por implementar el módulo *orders…* **(En progreso)**
+
 
 Como herramientas de consulta me he estado apoyando en la documentación de mongo DB, videos de YouTube y ChatGPT, mientras que para desarrollar ideas y planear el trabajo he estado usando un pizarrón y Notion
 
@@ -132,12 +132,12 @@ Para el desarrollo de la API se han desarrollado los siguientes endpoints de acu
 
 ## Módulo routes
 
-- [ ]  Validar que una ruta no se agregue dos veces → los campos pickup.point y dropOff.point sean iguales entre la ruta que se desea crear y una ruta creada
-- [ ]  Implementar endpoints para modificar y eliminar rutas → validar que que no se pueda modificar ni eliminar una ruta si el campo isAssigned es `true`
+- [x]  Validar que una ruta no se agregue dos veces → los campos pickup.point y dropOff.point sean iguales entre la ruta que se desea crear y una ruta creada
+- [x]  Implementar endpoints para modificar y eliminar rutas → validar que que no se pueda modificar ni eliminar una ruta si el campo isAssigned es `true`
 
 ## Aspectos generales
 
-- [ ]  Implementar el session middleware para proteger todas las rutas (excepto el endpoint **register**)
+- [x]  Implementar el session middleware para proteger todas las rutas (excepto el endpoint **register**)
 - [ ]  Documentar controladores, servicios, rutas, utilidades y el archivo server.ts
 
 ## Corregir
