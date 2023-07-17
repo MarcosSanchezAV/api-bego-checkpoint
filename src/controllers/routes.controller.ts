@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import { createRoute, deleteRoute, findRoute, findRoutes, updateRoute } from "../services/routes.services";
+import { addRoute, deleteRoute, findRoute, findRoutes, updateRoute } from "../services/routes.services";
 import httpHandler from "../utils/error.handler";
 
-const addRoute = async ({ body }: Request, res: Response) => {
+const createRoute = async ({ body }: Request, res: Response) => {
     try {
-        const responseService = await createRoute(body)
+        const responseService = await addRoute(body)
         res.send(responseService)
     } catch (e) {
         httpHandler(res, e)
@@ -50,4 +50,4 @@ const removeRoute = async ({ params }: Request, res: Response) => {
     }
 }
 
-export { addRoute, getRoute, getRoutes, changeRoute, removeRoute }
+export { createRoute, getRoute, getRoutes, changeRoute, removeRoute }

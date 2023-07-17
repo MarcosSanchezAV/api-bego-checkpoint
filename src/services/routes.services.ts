@@ -11,7 +11,7 @@ import { findPoint } from "./points.service"
  * @param to id del punto de llegada
  * @returns la ruta creada con el nombre, punto de partida y punto de llegada
  */
-const createRoute = async ({ name, from, to }: RouteRequest) => {
+const addRoute = async ({ name, from, to }: RouteRequest) => {
     const isInvalidPoints = await validatePoints(from, to)
     if (isInvalidPoints) return isInvalidPoints
 
@@ -144,4 +144,4 @@ const validatePoints = async (from: string, to: string) => {
     }
 }
 
-export { createRoute, findRoute, findRoutes, assignRoute, updateRoute, deleteRoute }
+export { addRoute, findRoute, findRoutes, assignRoute, updateRoute, deleteRoute }
