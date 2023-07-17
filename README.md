@@ -95,7 +95,21 @@ Primero empecé con los módulos *points* y *trucks* ya que eran los más fácil
 
 Para el módulo *auth* cree una colección llamada *users* para guardar todos los usuarios registrados y poder consultarlos para realizar el login. También utilicé los módulos npm **bcryptjs** y **jsonwebtoken** para encriptar la contraseña que el usuario proporcione al momento de registrarse y para manejar las sesiones en las rutas
 
-Para el módulo *routes* implementé el servicio para obtener las coordenadas de los puntos que conforman la ruta y la distancia entre ellos mediante peticiones a las APIs de Google (al parecer el número de peticiones son limitadas). 
+Para el módulo *routes* implementé el servicio para obtener las coordenadas de los puntos que conforman la ruta y la distancia entre ellos mediante peticiones a las APIs de Google (al parecer el número de peticiones son limitadas). En este módulo implemente CRUD requests agregando algunas validaciones entre cada tipo:
+
+- Create: No pueden crearse dos rutas con los mismos puntos, es decir, que tengan el mismo origen y el mismo destino, y no puede crearse una ruta que contenga puntos que no estén disponibles (que no existan en la base de datos)
+- Request: No hay validaciones aquí, ya que solo trae información existente
+- Update y Delete: No pueden modificarse ni eliminarse las rutas que estén asignadas a una orden, es decir que su campo **isAssigned** sea igual a `true`, de lo contrario si es igual a `false`, se puede eliminar o modificar
+
+También implementé un método adicional para destructurar las respuestas de mongo, ya que para los points regresa solo el id, sin sus características.
+
+Y finalmente para el módulo *orders* implementé un CRUD (sin eliminar), para poder agregar, modificar o listar órdenes. Algunas de las validaciones que agregué fueron:
+
+- Create: No puede crearse una orden sin una ruta existente, es decir, no puede crearse una orden agregando el origen y el destino directamente. No puede asignarse un camión que no exista
+- Request: Sin validaciones
+- Update: Hice un endpoint para cambiar la orden de estado entre “pending”, “progress”, “finished” y “cancelled”, y un endpoint para modificar la orden. Si la orden no está en *pending* la orden no podrá modificarse. Al cambiar de estado una orden que no sea *pending* la ruta asignada cambia a `isAssigned = true` . Si una orden pasa al estado *pending* la ruta pasara a `isAssigned = false`
+
+Como herramientas de consulta me he estado apoyando en la documentación de mongo DB, videos de YouTube y ChatGPT, mientras que para desarrollar ideas y planear el trabajo he estado usando un pizarrón y Notion. Para documentación de endpoints utilicé Postman
 
 
 
@@ -103,22 +117,10 @@ Como herramientas de consulta me he estado apoyando en la documentación de mong
 
 # Endpoints
 
-Para el desarrollo de la API se han desarrollado los siguientes endpoints de acuerdo al módulo:
+Para el desarrollo de la API se han desarrollado los siguientes endpoints de acuerdo al módulo. Hay cinco agrupaciones: auth, points, trucks, routes y orders.
 
-## Auth
+La documentación de los endpoints fue generado por Postman y están publicados en el siguiente enlace: [Documentación de Checkout API](https://documenter.getpostman.com/view/23587069/2s946ffZ7g#fd48b3f4-5a73-4ac8-8aa2-88ca87ffb813)
 
-| Nombre | Tipo | URL | Request | Response | Descripción |
-| --- | --- | --- | --- | --- | --- |
-| register | POST | auth/register | name, email, password | user | Registra un usuario, no permite registrar un usuario dos veces |
-| login | POST | auth/login | email, password | token, user | Verifica que un usuario se haya registrado e inicia sesión, devuelve un token que debe usarse para los demás endpoints |
-
-## Points
-
-## Trucks
-
-## Routes
-
-## Orders
 
 # To-Do del proyecto
 
@@ -138,9 +140,14 @@ Para el desarrollo de la API se han desarrollado los siguientes endpoints de acu
 ## Aspectos generales
 
 - [x]  Implementar el session middleware para proteger todas las rutas (excepto el endpoint **register**)
-- [ ]  Documentar controladores, servicios, rutas, utilidades y el archivo server.ts
+- [x]  Documentar endpoints
+    - [x]  Auth
+    - [x]  Points
+    - [x]  Truck
+    - [ ]  Routes
+    - [ ]  Orders
 - [ ]  Implementar todos los mensajes como variables de entorno
-
+- [x]  Agregar muchas validaciones
 ## Corregir
 
 - [x]  Los endpoint GET de los módulos *routes* y *orders* → en la respuesta devuelven el id de los objetos relacionados → destructurar correctamente la respuesta
@@ -149,6 +156,6 @@ Para el desarrollo de la API se han desarrollado los siguientes endpoints de acu
 
 ## Documento README
 
-- [ ]  Descripción del desarrollo del módulo *orders*
-- [ ]  Terminar sección Endpoints
+- [x]  Descripción del desarrollo del módulo *orders*
+- [x]  Terminar sección Endpoints
 - [ ]  Crear un índice dinámico 
