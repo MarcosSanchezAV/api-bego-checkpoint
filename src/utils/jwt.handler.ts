@@ -5,7 +5,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'secreto1234'
 
 const generateToken = (email: string) => {
     const jwt = sign({ email }, JWT_SECRET, {
-        expiresIn: '5min'
+        expiresIn: '2h'
     })
     return jwt
 }
