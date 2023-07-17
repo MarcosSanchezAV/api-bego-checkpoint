@@ -12,6 +12,9 @@ import { findPoint } from "./points.service"
  * @returns la ruta creada con el nombre, punto de partida y punto de llegada
  */
 const createRoute = async ({ name, from, to }: RouteRequest) => {
+    const isInvalidPoints = await validatePoints(from, to)
+    if (isInvalidPoints) return isInvalidPoints
+
     const isExist = await validateRoute(from, to)
     if (isExist) return "CANNOT_CREATE_SAME_ROUTE_TWICE"
 
@@ -52,6 +55,9 @@ const assignRoute = async (id: string, isAssigned: boolean) => {
 }
 
 const updateRoute = async (id: string, { name, from, to}: RouteRequest) => {
+    const isInvalidPoints = await validatePoints(from, to)
+    if (isInvalidPoints) return isInvalidPoints
+
     const isExist = await validateRoute(from, to)
     if (isExist) return "CANNOT_CREATE_SAME_ROUTE_TWICE"
     
@@ -122,6 +128,20 @@ const validateRoute = async (from: string, to: string) => {
         'dropOff.point': to
     })
     return route
+}
+
+const validatePoints = async (from: string, to: string) => {
+    if (from === to) return "CANNOT_PUT_SAME_LOCATION_IN_BOTH_POINTS"
+
+    const findFrom = await PointModel.findOne({ _id: from})
+    const findTo = await PointModel.findOne({ _id: to })
+    if (!findFrom && !findTo) {
+        return "BOTH_POINTS_ARE_NOT_VALID"
+    } else if (!findFrom) {
+        return "ORIGIN_POINT_IS_NOT_VALID"
+    } else if (!findTo) {
+        return "DESTINATION_POINT_IS_NOT_VALID"
+    }
 }
 
 export { createRoute, findRoute, findRoutes, assignRoute, updateRoute, deleteRoute }
