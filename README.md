@@ -139,6 +139,7 @@ Para el desarrollo de la API se han desarrollado los siguientes endpoints de acu
 
 - [x]  Implementar el session middleware para proteger todas las rutas (excepto el endpoint **register**)
 - [ ]  Documentar controladores, servicios, rutas, utilidades y el archivo server.ts
+- [ ]  Implementar todos los mensajes como variables de entorno
 
 ## Corregir
 
