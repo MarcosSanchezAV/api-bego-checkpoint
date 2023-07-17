@@ -1,4 +1,4 @@
-# api-bego-checkpoint
+# Checkpoint API 
 
 En este repositorio se encuentra el proyecto realizado por mi como prueba técnica para postulantes de backend. Este proyecto consiste en la creación de una API empleando las siguientes tecnologías:
 
