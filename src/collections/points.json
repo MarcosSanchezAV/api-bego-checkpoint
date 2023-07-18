@@ -1,0 +1,33 @@
+[{
+  "_id": {
+    "$oid": "6480d4a2665cefa2836dff01"
+  },
+  "location": {
+    "name": "Salida camiones, Laprida, C. Iguazú y, San Ramon de la Nueva Oran, Salta",
+    "placeId": "ChIJ68vJGdf3D5QRnIjueC_Y0nw"
+  }
+},{
+  "_id": {
+    "$oid": "6480d4d0665cefa2836dff02"
+  },
+  "location": {
+    "name": "Puerto Madero, CABA",
+    "placeId": "ChIJiQPXwtk0o5URj2cW455eew4"
+  }
+},{
+  "_id": {
+    "$oid": "6480d4f3665cefa2836dff03"
+  },
+  "location": {
+    "name": "Cristo Redentor, Las Heras, Mendoza",
+    "placeId": "ChIJ87xEQMoIfpYRKjWtKmr3JcA"
+  }
+},{
+  "_id": {
+    "$oid": "6480d521665cefa2836dff04"
+  },
+  "location": {
+    "name": "Parador - Centro Recreativo Camioneros Río Negro",
+    "placeId": "ChIJ3Y-ij4MjCpYRdyfBdtONwqc"
+  }
+}]

@@ -1,0 +1,100 @@
+[{
+  "_id": {
+    "$oid": "64b21271fe77d43556752df4"
+  },
+  "name": "Ruta de a deberas",
+  "pickup": {
+    "point": {
+      "$oid": "6480d521665cefa2836dff04"
+    },
+    "coordinates": {
+      "lat": -39.0010843,
+      "lng": -67.8488781
+    }
+  },
+  "dropOff": {
+    "point": {
+      "$oid": "6480d4d0665cefa2836dff02"
+    },
+    "coordinates": {
+      "lat": -34.6177194,
+      "lng": -58.3620561
+    }
+  },
+  "distance": 1117.991,
+  "isAssigned": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64b212e0fe77d43556752dfb"
+  },
+  "name": "Ruta de a deberas x2",
+  "pickup": {
+    "point": {
+      "$oid": "6480d521665cefa2836dff04"
+    },
+    "coordinates": {
+      "lat": -39.0010843,
+      "lng": -67.8488781
+    }
+  },
+  "dropOff": {
+    "point": {
+      "$oid": "6480d4a2665cefa2836dff01"
+    },
+    "coordinates": {
+      "lat": -23.1541711,
+      "lng": -64.33377159999999
+    }
+  },
+  "distance": 2143.195,
+  "isAssigned": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64b312a647d84594c07db4ac"
+  },
+  "name": "Ruta para transportar líquido",
+  "pickup": {
+    "point": {
+      "$oid": "6480d4d0665cefa2836dff02"
+    },
+    "coordinates": {
+      "lat": -34.6177194,
+      "lng": -58.3620561
+    }
+  },
+  "dropOff": {
+    "point": {
+      "$oid": "6480d4f3665cefa2836dff03"
+    },
+    "coordinates": {
+      "lat": -32.8568597,
+      "lng": -68.8152362
+    }
+  },
+  "distance": 1054.387,
+  "isAssigned": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64b32551829b29a39b5afe25"
+  },
+  "name": "Si sirve xd",
+  "pickup": {
+    "point": {
+      "$oid": "6480d4a2665cefa2836dff01"
+    }
+  },
+  "dropOff": {
+    "point": {
+      "$oid": "6480d521665cefa2836dff04"
+    }
+  },
+  "distance": 807.842,
+  "isAssigned": false,
+  "__v": 0
+}]

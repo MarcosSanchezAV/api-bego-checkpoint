@@ -17,6 +17,16 @@ La API también permite consultar la lista de puntos y camiones disponibles así
 # Tabla de contenido
 - [Como iniciar el proyecto](#inicio)
     - [Comandos](#comandos)
+    - [Variables de entorno](#variables-entorno)
+- [Procedimiento](#procedimiento)
+- [Documentación de los endpoints](#endpoints)
+- [To-Do del proyecto](#todo)
+    - [Módulo orders](#todo-orders)
+    - [Módulo routes](#todo-routes)
+    - [Aspectos generales](#aspectos-generales)
+    - [Corregir](#corregir)
+    - [Documento README](#documento-readme)
+
 
 # <a id="inicio"></a>Como iniciar el proyecto
 
@@ -55,7 +65,7 @@ Listo, ahora para iniciar el servidor se debe ejecutar el script definido en el 
 npm run server
 ```
 
-## Variables de entorno
+## <a id="variables-entorno"></a>Variables de entorno
 
 Como buena práctica el archivo .env está declarado en el .gitignore, por lo que no existe en el repositorio clonado, se debe agregar manualmente en el root del proyecto e indicar las siguientes variables:
 
@@ -76,7 +86,7 @@ API_GOOGLE_MAPS_URL_DISTANCE=https://maps.googleapis.com/maps/api/distancematrix
 
 Si desea usar unas variables propias se pueden modificar en este archivo
 
-# Procedimiento de desarrollo
+# <a id="procedimiento"></a>Procedimiento
 
 Personalmente había usado muy poco el framework Node y no tenía conocimiento sobre bases de datos no relacionales, así que investigué sobre las prácticas que se usan para construir APIs con Node y sobre mongo DB en general, a la par que aprendía a hacer ciertas cosas empecé a crear el proyecto y su división de carpetas. Decidí usar la siguiente convención:
 
@@ -115,16 +125,16 @@ Como herramientas de consulta me he estado apoyando en la documentación de mong
 
 Como herramientas de consulta me he estado apoyando en la documentación de mongo DB, videos de YouTube y ChatGPT, mientras que para desarrollar ideas y planear el trabajo he estado usando un pizarrón y Notion
 
-# Endpoints
+# <a id="endpoints"></a>Documentación de los endpoints
 
 Para el desarrollo de la API se han desarrollado los siguientes endpoints de acuerdo al módulo. Hay cinco agrupaciones: auth, points, trucks, routes y orders.
 
 La documentación de los endpoints fue generado por Postman y están publicados en el siguiente enlace: [Documentación de Checkout API](https://documenter.getpostman.com/view/23587069/2s946ffZ7g#fd48b3f4-5a73-4ac8-8aa2-88ca87ffb813)
 
 
-# To-Do del proyecto
+# <a id="todo"></a>To-Do del proyecto
 
-## Módulo orders
+## <a id="todo-orders"></a>Módulo orders
 
 - [x]  Implementar módulo Orders
     - [x]  Implementar endpoint para agregar una orden
@@ -132,29 +142,29 @@ La documentación de los endpoints fue generado por Postman y están publicados 
     - [x]  Implementar endpoint updateOrderStatus → cambiar el estado de la orden (pending, in progress, finished y cancelled)
     - [x]  Implementar endpoint updateOrder → validar que se modifique solo si el status está en Pending
 
-## Módulo routes
+## <a id="todo-routes"></a>Módulo routes
 
 - [x]  Validar que una ruta no se agregue dos veces → los campos pickup.point y dropOff.point sean iguales entre la ruta que se desea crear y una ruta creada
 - [x]  Implementar endpoints para modificar y eliminar rutas → validar que que no se pueda modificar ni eliminar una ruta si el campo isAssigned es `true`
 
-## Aspectos generales
+## <a id="aspectos-generales"></a>Aspectos generales
 
 - [x]  Implementar el session middleware para proteger todas las rutas (excepto el endpoint **register**)
 - [x]  Documentar endpoints
     - [x]  Auth
     - [x]  Points
     - [x]  Truck
-    - [ ]  Routes
+    - [x]  Routes
     - [ ]  Orders
 - [ ]  Implementar todos los mensajes como variables de entorno
 - [x]  Agregar muchas validaciones
-## Corregir
+## <a id="corregir"></a>Corregir
 
 - [x]  Los endpoint GET de los módulos *routes* y *orders* → en la respuesta devuelven el id de los objetos relacionados → destructurar correctamente la respuesta
     - [x]  endpoints de *routes*
     - [x]  endpoint de *orders*
 
-## Documento README
+## <a id="documento-readme"></a>Documento README
 
 - [x]  Descripción del desarrollo del módulo *orders*
 - [x]  Terminar sección Endpoints

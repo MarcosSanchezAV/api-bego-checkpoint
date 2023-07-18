@@ -1,0 +1,90 @@
+[{
+  "_id": {
+    "$oid": "64b24f49d091744682cfbef5"
+  },
+  "type": "General",
+  "description": "Orden de prueba 2",
+  "route": {
+    "$oid": "64b212e0fe77d43556752dfb"
+  },
+  "truck": {
+    "$oid": "647e80bb08f76ab0e20a6ca1"
+  },
+  "status": "Pending",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64b2522f2f607c5b388217c1"
+  },
+  "type": "Liquid",
+  "description": "Orden de prueba 3",
+  "route": {
+    "$oid": "64b21271fe77d43556752df4"
+  },
+  "truck": {
+    "$oid": "647e7fa808f76ab0e20a6c9a"
+  },
+  "status": "Pending",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64b2523a2f607c5b388217c3"
+  },
+  "type": "Liquid",
+  "description": "Orden de prueba 3",
+  "route": {
+    "$oid": "64b21271fe77d43556752df4"
+  },
+  "truck": {
+    "$oid": "647e7fa808f76ab0e20a229a"
+  },
+  "status": "Pending",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64b252482f607c5b388217c5"
+  },
+  "type": "Liquid",
+  "description": "Orden de prueba 3",
+  "route": {
+    "$oid": "64b21271fe77d43556752df4"
+  },
+  "truck": {
+    "$oid": "647e7fa808f72ab0e20a229a"
+  },
+  "status": "Pending",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64b31cca167839cd8ec762b0"
+  },
+  "type": "Liquid",
+  "description": "Order para uso de transporte de gas LP y freon",
+  "route": {
+    "$oid": "64b312a647d84594c07db4ac"
+  },
+  "truck": {
+    "$oid": "647e807d08f76ab0e20a6c9e"
+  },
+  "status": "Finished",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "64b4bd2081e05a25f2b8b1f8"
+  },
+  "type": "General",
+  "description": "Si puede modificarse esta orden",
+  "route": {
+    "$oid": "64b21271fe77d43556752df4"
+  },
+  "truck": {
+    "$oid": "647e7fa808f76ab0e20a6c9a"
+  },
+  "status": "Pending",
+  "__v": 0
+}]
