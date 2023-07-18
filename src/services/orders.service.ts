@@ -37,9 +37,9 @@ const updateOrderStatus = async (id: string, newStatus: string) => {
     if (!order) return "ORDER_NOT_FOUND"
 
     if (status !== Status.PENDING && !order.route.isAssigned) {
-        await assignRoute(order.route.id, true)
+        await assignRoute(order.route._id, true)
     } else if (status === Status.PENDING && order.route.isAssigned) {
-        await assignRoute(order.route.id, false) 
+        await assignRoute(order.route._id, false) 
     }
 
     const response = await OrderModel.findOneAndUpdate({ _id: id }, { status }, { new: true })
