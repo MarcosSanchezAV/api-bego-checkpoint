@@ -1,0 +1,51 @@
+[{
+  "_id": {
+    "$oid": "647e7f2708f76ab0e20a6c98"
+  },
+  "model": "Freightliner",
+  "make": "Brighnton, CO",
+  "year": 2022,
+  "color": "white",
+  "transportWeight": 52000,
+  "created_at": 1686011670
+},{
+  "_id": {
+    "$oid": "647e7fa808f76ab0e20a6c9a"
+  },
+  "model": "Volvo VNL",
+  "make": "Transwest of Brighton, CO",
+  "year": 2023,
+  "color": "white",
+  "transportWeight": 40000,
+  "created_at": 1686011670
+},{
+  "_id": {
+    "$oid": "647e7fd008f76ab0e20a6c9c"
+  },
+  "model": "Kenworth T680",
+  "make": "Lochbuie",
+  "year": 2019,
+  "color": "red",
+  "transportWeight": 62500,
+  "created_at": 1686011670
+},{
+  "_id": {
+    "$oid": "647e807d08f76ab0e20a6c9e"
+  },
+  "model": "International LT625",
+  "make": "Chatham, Ontario",
+  "year": 2023,
+  "color": "black",
+  "transportWeight": 52000,
+  "created_at": 1686011670
+},{
+  "_id": {
+    "$oid": "647e80bb08f76ab0e20a6ca1"
+  },
+  "model": "Peterbilt",
+  "make": "Ohio",
+  "year": 2018,
+  "color": "red",
+  "transportWeight": 45500,
+  "created_at": 1686011670
+}]
