@@ -12,7 +12,7 @@ import { findPoint } from "./points.service"
  * @returns la ruta creada con el nombre, punto de partida y punto de llegada
  */
 const addRoute = async ({ name, from, to }: RouteRequest) => {
-    const isInvalidPoints = await validatePoints(from, to)
+    const isInvalidPoints = await createValidatePoints(from, to)
     if (isInvalidPoints) return isInvalidPoints
 
     const isExist = await validateRoute(from, to)
@@ -34,7 +34,8 @@ const addRoute = async ({ name, from, to }: RouteRequest) => {
         },
         distance
     })
-    return response
+    const route = destructurateRoute(response)
+    return route
 }
 
 const findRoutes = async () => {
@@ -55,7 +56,7 @@ const assignRoute = async (id: string, isAssigned: boolean) => {
 }
 
 const updateRoute = async (id: string, { name, from, to}: RouteRequest) => {
-    const isInvalidPoints = await validatePoints(from, to)
+    const isInvalidPoints = await updateValidatePoints(from, to)
     if (isInvalidPoints) return isInvalidPoints
 
     const isExist = await validateRoute(from, to)
@@ -73,7 +74,8 @@ const updateRoute = async (id: string, { name, from, to}: RouteRequest) => {
             point: to
         }
     }, { new: true })
-    return response
+    const updatedRoute = destructurateRoute(response)
+    return updatedRoute
 }
 
 const deleteRoute = async (id: string) => {
@@ -111,7 +113,7 @@ const destructurateRoute = async (route: any) => {
     const dropOffPoint = await PointModel.findOne({ _id: route.dropOff.point })
 
     const routeObject = {
-        id: route._id,
+        _id: route._id,
         name: route.name,
         pickUp: pickupPoint,
         dropOff: dropOffPoint,
@@ -130,7 +132,7 @@ const validateRoute = async (from: string, to: string) => {
     return route
 }
 
-const validatePoints = async (from: string, to: string) => {
+const createValidatePoints = async (from: string, to: string) => {
     if (from === to) return "CANNOT_PUT_SAME_LOCATION_IN_BOTH_POINTS"
 
     const findFrom = await PointModel.findOne({ _id: from})
@@ -141,6 +143,20 @@ const validatePoints = async (from: string, to: string) => {
         return "ORIGIN_POINT_IS_NOT_VALID"
     } else if (!findTo) {
         return "DESTINATION_POINT_IS_NOT_VALID"
+    }
+}
+
+const updateValidatePoints = async (from: string, to: string) => {
+    if (from === to && from) return "CANNOT_PUT_SAME_LOCATION_IN_BOTH_POINTS"
+
+    if (from) {
+        const findFrom = await PointModel.findOne({ _id: from})
+        if (!findFrom) return "ORIGIN_POINT_IS_NOT_VALID"
+    }
+    
+    if (to) {
+        const findTo = await PointModel.findOne({ _id: to })
+        if (!findTo) return "DESTINATION_POINT_IS_NOT_VALID"
     }
 }
 
